@@ -8,6 +8,6 @@
 
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
 
-**Member**: 
+**Member**: Eric Pham () ()
 
-**Member**: 
+**Member**: Prakriti Poudel () ()
