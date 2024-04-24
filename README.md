@@ -8,7 +8,7 @@
 - SRC Presentation
   
 **Member**: Jazmin Carlos (@jazcar1205) (jazmincarlos@cpp.edu)
-
+- Tasking Scheduling
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
 
 **Member**: Eric Pham (@1hperic) (ericpham@cpp.edu)
