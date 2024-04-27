@@ -38,6 +38,8 @@ public class Task {
     public void setStatus (String status){
         this.status = status; 
     }
+
+    
    /*added getters and setters*/
     public boolean isComplete() {
         return complete;
