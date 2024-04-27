@@ -16,22 +16,22 @@ public class CentralManagementApp {
 		displayMainMenu();
 
 		while (isRunning) {
-			int choice = scan.nextInt();
+			String choice = scan.nextLine();
 
 			switch (choice) {
-				case 1: 
+				case "1": 
 					manageTasks();
 					break;
-				case 2:
+				case "2":
 					manageCrops();
 					break;
-				case 3:
+				case "3":
 					farmAnalytics();
 					break;
-				case 4:
+				case "4":
 					generateReport();
 					break;
-				case 5:
+				case "5":
 					isRunning = false;
 					break;
 				default:
