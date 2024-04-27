@@ -73,9 +73,8 @@ public class TaskScheduler {
         }
           
     }
-    
-    
-    
-    
-    
+
+    public Volunteer getNextVolunteer() {
+        return volunteers.peek();
+    }
 }
