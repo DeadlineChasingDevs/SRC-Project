@@ -26,9 +26,15 @@ public class Volunteer {
 
     // Method to print the volunteer's assigned tasks
     public void printAssignedTasks() {
+        if (assignedTasks.isEmpty()) {
+        System.out.println("No tasks assigned to " + name);
+    } else {
+        System.out.println(name + "'s Assigned Tasks:");
         for (Task task : assignedTasks) {
             System.out.println(task);
         }
+    }
+        
     }
 
     public String getName(){
