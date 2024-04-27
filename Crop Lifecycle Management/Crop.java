@@ -21,7 +21,7 @@ public class Crop {
     public int getExpirationDaysFromPlanting() {
         return expirationDaysFromPlanting;
     }
-    /*added planting date*/
+    /*added planting date,harvesting date*/
     public LocalDate getPlantingDate() {
         return plantingDate;
     }
