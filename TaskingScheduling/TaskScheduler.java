@@ -31,7 +31,10 @@ public class TaskScheduler {
         }
 
     }
-
+    public List<Task> getTasks() {
+        return tasks;
+    }
+    
     // Method to schedule a task
     public void scheduleTask(Task task) {
         // Find the index to insert the task based on its priority
