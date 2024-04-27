@@ -32,12 +32,9 @@ public class CentralManagementApp {
 					manageCrops();
 					break;
 				case "3":
-					farmAnalytics();
-					break;
-				case "4":
 					generateReport();
 					break;
-				case "5":
+				case "4":
 					isRunning = false;
 					break;
 				default:
@@ -111,11 +108,6 @@ public class CentralManagementApp {
 		// ...
 	}
 
-	private static void farmAnalytics() {
-		System.out.println("Farm Analytics");
-		// ...
-	}
-
 	private static void generateReport() {
 		System.out.println("Generating your report...");
 		// ...
@@ -124,9 +116,8 @@ public class CentralManagementApp {
 	private static void displayMainMenu() {
 		System.out.println("1) Task Management");
 		System.out.println("2) Crop Management");
-		System.out.println("3) Farm Analytics");
-		System.out.println("4) Farm Report");
-		System.out.println("5) Exit");
+		System.out.println("3) Farm Report");
+		System.out.println("4) Exit");
 		System.out.println();
 
 		System.out.print("Enter number choice: ");
