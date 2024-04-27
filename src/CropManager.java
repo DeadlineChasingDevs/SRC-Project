@@ -11,13 +11,6 @@ public class CropManager {
         this.crops = crops;
     }
 
-    public void displayCrops() {
-        System.out.println("List of Crops:");
-        for (Crop crop : crops) {
-            System.out.println(crop);
-        }
-    }
-
     public void addCrop(Crop crop) {
         crops.add(crop);
     }
