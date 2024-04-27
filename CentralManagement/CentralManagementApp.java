@@ -1,11 +1,17 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 /** 
  * A centralized management app that keeps task scheduling, crop management, farm analytics, 
  * and a farm report all in one place, enabling higher farm productivity and efficiency.
+ * Note: This is a concept application; data is not saved in between uses.
  */
 
 public class CentralManagementApp {
+	private static TaskScheduler taskScheduler = new TaskScheduler();
+	private static CropManager cropManager = new CropManager();
+	private static ReportGenerator report = new ReportGenerator();
 	public static void main(String[] args) {
 
 		System.out.println("Lopez Urban Farm Management App 1.0");
@@ -39,29 +45,65 @@ public class CentralManagementApp {
 			}
 		}
 
+		scan.close();
 		System.out.println("Closing application...");
 		System.out.println();
-		scan.close();
 	}
 
 	private static void manageTasks() {
-		TaskScheduler taskScheduler = new TaskScheduler();
-		
-		// display all tasks
-		displayTasks();
+		Scanner scan = new Scanner(System.in);
 
-		// display ongoing assignments
-		taskScheduler.printSchedule();
+		System.out.println(taskScheduler.getTasks()); // Display all tasks
+		System.out.println();
+		taskScheduler.printSchedule(); // Display ongoing assignments
 
-		// does user want to interact with tasks?
+		System.out.println("1) Schedule a new Task");
+		System.out.println("2) Task Assignment");
+		System.out.println("3) Manage Volunteers");
+		System.out.println("4) Return to Main Menu");
+		System.out.println("Enter number choice: ");
+		String choice = scan.nextLine();
 
-		// ask user to exit program or return to main menu
+		boolean isManagingTasks = true;
 
-	}
+		while (isManagingTasks) {
+			switch (choice) {
+				case "1":
+					System.out.print("Enter new task name: ");
+					String taskName = scan.nextLine();
+					System.out.println("Enter the resources required one at a time (type 'done' to end list):");
+					List<String> resources = new ArrayList<>();
+					String resource = scan.nextLine();
+					while (!resource.equals("done")) {
+						resources.add(resource);
+						resource = scan.nextLine();
+					}
+					System.out.print("Enter task priority: ");
+					int priority = scan.nextInt();
+					System.out.println("How many volunteers needed for task? ");
+					int volunteersNeeded = scan.nextInt();
+	
+					taskScheduler.scheduleTask(new Task(taskName, priority, volunteersNeeded, resources));
+					break;
+	
+				case "2":
 
-	private static void displayTasks() {
-		
+					break;
+	
+				case "3":
 
+					
+					break;
+	
+				case "4":
+					isManagingTasks = false;
+					break;
+	
+				default:
+					break;
+			}
+			System.out.println("Enter number choice: ");
+		}
 	}
 
 	private static void manageCrops() {
