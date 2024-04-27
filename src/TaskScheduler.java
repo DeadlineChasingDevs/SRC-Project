@@ -49,7 +49,6 @@ public class TaskScheduler {
 
     // Method to assign a task to a volunteer
     public void assignTaskToVolunteer(Task task, Volunteer volunteer) {
-        task.setStatus(" In progress");
         if (!tasks.contains(task)) {
             System.out.println("Task not found.");
             return;
