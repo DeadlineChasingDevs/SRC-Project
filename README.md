@@ -11,8 +11,8 @@
 - Tasking Scheduling
   
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
- -Report
- -volunteer.java, task.java
+ - Report
+ - volunteer.java, task.java
  
 **Member**: Eric Pham (@1hperic) (ericpham@cpp.edu)
 
