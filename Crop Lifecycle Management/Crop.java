@@ -29,6 +29,30 @@ public class Crop {
     public void setPlantingDate(LocalDate plantingDate) {
         this.plantingDate = plantingDate;
     }
+
+    public LocalDate getHarvestDate() {
+        return harvestDate;
+    }
+
+    public void setHarvestDate(LocalDate harvestDate) {
+        this.harvestDate = harvestDate;
+    }
+
+    public LocalDate calculateExpirationDate() {
+        if (plantingDate != null) {
+            return plantingDate.plusDays(expirationDaysFromPlanting);
+        } else {
+            return null;
+        }
+    }
+
+    public String formatDate(LocalDate date) {
+        if (date != null) {
+            return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } else {
+            return "Not set";
+        }
+    }
     @Override
     public String toString() {
         return "Crop: " + name + " | Expiration: " + expirationDaysFromPlanting + " days from planting";
