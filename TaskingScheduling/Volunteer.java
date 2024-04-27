@@ -4,6 +4,8 @@ import java.util.List;
 public class Volunteer {
     private String name;
     private List<Task> assignedTasks;
+    private double rating;
+    private String feedback;
 
     public List<Task> getAssignedTasks() {
         return assignedTasks;
@@ -12,6 +14,8 @@ public class Volunteer {
     public Volunteer(String name) {
         this.name = name;
         this.assignedTasks = new ArrayList<>();
+        this.rating = 0;
+        this.feedback = "";
     }
 
     // Method to assign a task to the volunteer
@@ -44,5 +48,20 @@ public class Volunteer {
 
     public String toString() {
         return "Volunteer: " + name;
+    }
+     public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getFeedback() {
+        return feedback;
     }
 }
