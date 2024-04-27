@@ -1,46 +1,42 @@
-
 public class Task {
     private String name;
     private int priority;
-    private String status;
-    /*added functions*/
     private boolean complete;
-    private int additionalTimeNeeded;
+    private int additionalTimeNeeded; // in days
     private String completionTime;
     private String completionQuality;
+    private int volunteersNeeded;
+    private List<String> requiredResources;
 
-    public Task(String name, int priority) {
+    public Task(String name, int priority, int volunteersNeeded, List<String> requiredResources) {
         this.name = name;
         this.priority = priority;
-        this.status = "unassigned"; // Initial status
+        this.volunteersNeeded = volunteersNeeded;
+        this.requiredResources = requiredResources;
+        this.complete = false;
+        this.additionalTimeNeeded = 0;
+        this.completionTime = "";
+        this.completionQuality = "";
     }
 
-    public String getName(){
-        return name; 
+    // Getters and setters
+
+    public String getName() {
+        return name;
     }
 
-    public void setName(String name){
-        this.name = name; 
+    public int getPriority() {
+        return priority;
     }
 
-    public int getPriority(){
-        return priority; 
+    public int getVolunteersNeeded() {
+        return volunteersNeeded;
     }
 
-    public void setPriority(int priority){
-        this.priority = priority; 
+    public List<String> getRequiredResources() {
+        return requiredResources;
     }
 
-    public String getStatus(){
-        return status; 
-    }
-
-    public void setStatus (String status){
-        this.status = status; 
-    }
-
-    
-   /*added getters and setters*/
     public boolean isComplete() {
         return complete;
     }
@@ -72,11 +68,14 @@ public class Task {
     public void setCompletionQuality(String completionQuality) {
         this.completionQuality = completionQuality;
     }
+
+    @Override
     public String toString() {
         String statusStr = complete ? "Complete" : "Incomplete";
         if (!complete && additionalTimeNeeded > 0) {
             statusStr += " (Additional time needed: " + additionalTimeNeeded + " days)";
         }
-        return "Task: " + name + " | Status: " + statusStr + " | Priority: " + priority;
+        return "Task: " + name + " | Status: " + statusStr + " | Priority: " + priority +
+                " | Volunteers needed: " + volunteersNeeded + " | Resources: " + requiredResources;
     }
 }
