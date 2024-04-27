@@ -9,6 +9,9 @@
   
 **Member**: Jazmin Carlos (@jazcar1205) (jazmincarlos@cpp.edu)
 - Tasking Scheduling
+    - Task.java
+    - Volunteer.java
+    - TaskScheduler.java
   
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
  - Report
