@@ -10,7 +10,25 @@ public class ReportGenerator {
     }
 
     // Method to generate crop growth report
-
+    public void generateCropGrowthReport(List<Crop> crops) {
+        System.out.println("Crop Growth Report:");
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%-20s%-20s%-20s%-20s%n", "Crop", "Planting Date", "Harvest Date", "Expiration Date");
+        System.out.println("--------------------------------------------------");
+        for (Crop crop : crops) {
+            String plantingDate = crop.getPlantingDate() != null ?
+                                  crop.getPlantingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
+                                  "Not set";
+            String harvestDate = crop.getHarvestDate() != null ?
+                                 crop.getHarvestDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
+                                 "Not set";
+            String expirationDate = crop.calculateExpirationDate() != null ?
+                                     crop.calculateExpirationDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
+                                     "Not set";
+            System.out.printf("%-20s%-20s%-20s%-20s%n", crop.getName(), plantingDate, harvestDate, expirationDate);
+        }
+        System.out.println("--------------------------------------------------");
+    }
     // Method to generate task completion report
     public void generateTaskCompletionReport(TaskScheduler taskScheduler) {
         System.out.println("Task Completion Report:");
@@ -35,6 +53,7 @@ public class ReportGenerator {
                 }
             }
         }
+        System.out.println("--------------------------------------------------");
     }
 
     // Method to generate volunteer performance report
@@ -50,6 +69,7 @@ public class ReportGenerator {
                     // Store the feedback
                     volunteer.setFeedback(feedback);
                 }
+         System.out.println("--------------------------------------------------");
     }
 
     // Method to list volunteers and their assigned tasks with expected finish times
@@ -65,6 +85,7 @@ public class ReportGenerator {
                 }
             }
         }
+        System.out.println("--------------------------------------------------");
     }
 
 
