@@ -3,6 +3,11 @@ public class Task {
     private String name;
     private int priority;
     private String status;
+    /*added functions*/
+    private boolean complete;
+    private int additionalTimeNeeded;
+    private String completionTime;
+    private String completionQuality;
 
     public Task(String name, int priority) {
         this.name = name;
@@ -33,8 +38,43 @@ public class Task {
     public void setStatus (String status){
         this.status = status; 
     }
-   
+   /*added getters and setters*/
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void markAsComplete() {
+        this.complete = true;
+    }
+
+    public int getAdditionalTimeNeeded() {
+        return additionalTimeNeeded;
+    }
+
+    public void setAdditionalTimeNeeded(int additionalTimeNeeded) {
+        this.additionalTimeNeeded = additionalTimeNeeded;
+    }
+
+    public String getCompletionTime() {
+        return completionTime;
+    }
+
+    public void setCompletionTime(String completionTime) {
+        this.completionTime = completionTime;
+    }
+
+    public String getCompletionQuality() {
+        return completionQuality;
+    }
+
+    public void setCompletionQuality(String completionQuality) {
+        this.completionQuality = completionQuality;
+    }
     public String toString() {
-        return "Task: " + name + " | Status: " + status + " | Priority: " + priority;
+        String statusStr = complete ? "Complete" : "Incomplete";
+        if (!complete && additionalTimeNeeded > 0) {
+            statusStr += " (Additional time needed: " + additionalTimeNeeded + " days)";
+        }
+        return "Task: " + name + " | Status: " + statusStr + " | Priority: " + priority;
     }
 }
