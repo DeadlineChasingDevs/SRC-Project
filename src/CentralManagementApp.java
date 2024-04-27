@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * and a farm report all in one place, enabling higher farm productivity and efficiency.
  * Note: This is a concept application; data is not saved in between uses.
  */
-
 public class CentralManagementApp {
 	private static TaskScheduler taskScheduler = new TaskScheduler();
 	private static CropManager cropManager = new CropManager();
@@ -55,9 +54,8 @@ public class CentralManagementApp {
 		taskScheduler.printSchedule(); // Display ongoing assignments
 
 		System.out.println("1) Schedule a new Task");
-		System.out.println("2) Task Assignment");
-		System.out.println("3) Manage Volunteers");
-		System.out.println("4) Return to Main Menu");
+		System.out.println("2) Manage Volunteers");
+		System.out.println("3) Return to Main Menu");
 		System.out.println("Enter number choice: ");
 		String choice = scan.nextLine();
 
@@ -79,8 +77,16 @@ public class CentralManagementApp {
 					int priority = scan.nextInt();
 					System.out.println("How many volunteers needed for task? ");
 					int volunteersNeeded = scan.nextInt();
+
+					Task newTask = new Task(taskName, priority, volunteersNeeded, resources)
 	
-					taskScheduler.scheduleTask(new Task(taskName, priority, volunteersNeeded, resources));
+					taskScheduler.scheduleTask(newTask);
+
+					System.out.println("Would you like to assign this task to the next available Volunteer? (Y/N)");
+					boolean assigned = scan.nextLine().equalsIgnoreCase("Y");
+					if (assigned)
+						taskScheduler.assignTaskToVolunteer(newTask, taskScheduler.getNextVolunteer());
+
 					break;
 	
 				case "2":
@@ -88,11 +94,6 @@ public class CentralManagementApp {
 					break;
 	
 				case "3":
-
-					
-					break;
-	
-				case "4":
 					isManagingTasks = false;
 					break;
 	
