@@ -1,4 +1,4 @@
-public class Main {
+public class TaskSchedulerDemo {
     public static void main(String[] args) {
         TaskScheduler scheduler = new TaskScheduler();
 

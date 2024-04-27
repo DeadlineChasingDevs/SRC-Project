@@ -1,5 +1,5 @@
 // Main class to demonstrate the functionality of the Crop Lifecycle Management section
-public class CropLifecycleManagementApp {
+public class CropLifecycleManagementDemo {
     public static void main(String[] args) {
         // Instantiate CropManager
         CropManager cropManager = new CropManager();
