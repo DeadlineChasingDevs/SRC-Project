@@ -38,6 +38,35 @@ public class ReportGenerator {
     }
 
     // Method to generate volunteer performance report
+     public void rateVolunteer(Volunteer volunteer) {
+        System.out.print("Rate volunteer " + volunteer.getName() + " (1 to 5): ");
+        double rating = scanner.nextDouble();
+        scanner.nextLine();
+        if (rating < 2.5) {
+            System.out.println("Volunteer rated below 2.5. Do not assign tasks to them again.");
+        }else {
+                    System.out.print("Provide feedback to volunteer " + volunteer.getName() + ": ");
+                    String feedback = scanner.nextLine();
+                    // Store the feedback
+                    volunteer.setFeedback(feedback);
+                }
+    }
+
+    // Method to list volunteers and their assigned tasks with expected finish times
+    public void listVolunteersAndTasks(List<Volunteer> volunteers) {
+        System.out.println("Volunteers and Their Assigned Tasks:");
+        for (Volunteer volunteer : volunteers) {
+            System.out.println("Volunteer: " + volunteer.getName());
+            if (volunteer.getAssignedTasks().isEmpty()) {
+                System.out.println("No tasks assigned.");
+            } else {
+                for (Task task : volunteer.getAssignedTasks()) {
+                    System.out.println("- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
+                }
+            }
+        }
+    }
+
 
     public void closeScanner() {
         scanner.close();
