@@ -72,7 +72,7 @@ public class InventoryAnalytics {
 		return turnoverRate = soldGoodsValue / valInventory;
 	}
 
-	public Product geProduct(String product) {
+	public Product getProduct(String product) {
 		if (inventory.contains(product)) {
 			int next = 0;
 			boolean found = false;
