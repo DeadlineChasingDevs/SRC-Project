@@ -73,8 +73,12 @@ public class TaskScheduler {
           
     }
     
-    public Queue<Volunteer> getVolunteers() {
-        return volunteers;
+    public List<Volunteer> getVolunteers(){
+        List<Volunteer> volunteerList = new ArrayList<>();
+        while (!volunteers.isEmpty()) {
+            volunteerList.add(volunteers.poll()); // Removes and returns the head of the queue
+        }
+        return volunteerList; 
     }
     
     public Volunteer getNextVolunteer() {
