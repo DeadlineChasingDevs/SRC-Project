@@ -14,6 +14,8 @@ public class CentralManagementApp {
 	private static InventoryAnalytics inventory = new InventoryAnalytics();
 	
 	public static void main(String[] args) {
+		initalizeTestValues(); // Set up application with values for Demo purposes
+
 		boolean isRunning = true;
 		String choice;
 		Scanner scan = new Scanner(System.in);
@@ -370,5 +372,44 @@ public class CentralManagementApp {
 		System.out.println();
 
 		System.out.print("Enter number choice: ");
+	}
+
+	// Since data is not saved in between uses, we set up values for Demo purposes for each use
+	private static void initalizeTestValues() {
+
+		// Volunteers
+		Volunteer v = new Volunteer("Prakriti");
+		taskScheduler.addVolunteer(new Volunteer("Liam"));
+		taskScheduler.addVolunteer(new Volunteer("Jazmin"));
+		taskScheduler.addVolunteer(new Volunteer("Guanlin"));
+		taskScheduler.addVolunteer(new Volunteer("Eric"));
+		taskScheduler.addVolunteer(v);
+
+		// Tasks
+		List<String> gardeningList = new ArrayList<>();
+		gardeningList.add("shovel");
+		gardeningList.add("seeds");
+		Task garden = new Task("Garden", 3, 2, gardeningList);
+
+		List<String> tourList = new ArrayList<>();
+		tourList.add("farm map");
+		Task tour = new Task("Farm Tour", 1, 1, tourList);
+
+		taskScheduler.scheduleTask(garden);
+		taskScheduler.scheduleTask(tour);
+
+		taskScheduler.assignTaskToVolunteer(tour, v);
+
+
+		// Crop Management
+		cropManager.addCrop(new Crop("Tomatoes", 60));
+		cropManager.addCrop(new Crop("Lettuce", 90));
+		cropManager.addCrop(new Crop("Carrots", 120));
+
+
+		// Farm Analytics
+		inventory.addProduct(new Product("Tomato", 100, 0, 10.00, 8.00, 30));
+		inventory.addProduct(new Product("Corn", 50, 0, 20.00, 15.00, 60));
+		inventory.setExpenses(50.0);
 	}
 }
