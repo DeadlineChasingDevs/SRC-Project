@@ -69,7 +69,7 @@ public class InventoryAnalytics {
 		for (Product product : inventory) {
 			soldGoodsValue += product.getSold() * product.getSellPrice();
 		}
-		return turnoverRate = soldGoodsValue / valInventory;
+		return turnoverRate = soldGoodsValue / getValInventory();
 	}
 
 	public Product getProduct(String product) {
