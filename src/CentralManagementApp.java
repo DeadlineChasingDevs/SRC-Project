@@ -11,18 +11,19 @@ public class CentralManagementApp {
 	private static TaskScheduler taskScheduler = new TaskScheduler();
 	private static CropManager cropManager = new CropManager();
 	private static ReportGenerator report = new ReportGenerator();
+	
 	public static void main(String[] args) {
-
-		System.out.println("Lopez Urban Farm Management App 1.0");
-		
 		boolean isRunning = true;
 		Scanner scan = new Scanner(System.in);
-
-		displayMainMenu();
-
+		
 		while (isRunning) {
+			System.out.println("Lopez Urban Farm Management App 1.0");
+           		System.out.println("-----------------------------------");
+			
+            		displayMainMenu();
+			
 			String choice = scan.nextLine();
-
+			
 			switch (choice) {
 				case "1": 
 					manageTasks();
@@ -42,6 +43,7 @@ public class CentralManagementApp {
 		}
 
 		scan.close();
+		
 		System.out.println("Closing application...");
 		System.out.println();
 	}
@@ -110,9 +112,94 @@ public class CentralManagementApp {
 	}
 
 	private static void generateReport() {
-		System.out.println("Generating your report...");
-		// ...
-	}
+        Scanner input = new Scanner(System.in);
+        boolean reportGiven = false;
+        while (!reportGiven) {
+
+            System.out.println(" Select Desired Report:\n a) Crop Growth Report \n b) Task Completion Report \n c) Volunteer Rating Report \n d) Volunteers and Task Report");
+            String option = input.nextLine();
+            switch(option) {
+                case "a":
+                System.out.println("Crop"); 
+                    //report.generateCropGrowthReport(null);
+                    reportGiven = true;
+                    break;
+                case "b": 
+                    System.out.println("Task"); 
+                    //report.generateTaskCompletionReport(taskScheduler);
+                    reportGiven = true;
+                    break;
+                case "c": 
+                    boolean volunteerFound =false;
+                    while(!volunteerFound){
+                        System.out.println("Enter Volunteer's Name");
+                        String gnInput= input.nextLine(); 
+                    
+                        for(Volunteer person: taskScheduler.getVolunteers()){
+                            if((person.getName()).equalsIgnoreCase(gnInput)){
+                                System.out.println("Volunteer Found");
+                                System.out.println("Generating Report");
+                                report.rateVolunteer(person);
+                                reportGiven = true;
+                                break;
+                            }
+                        }
+
+                        System.out.println("Volunteer Not Found");
+
+                        boolean tryAgain = false;
+                        while (!tryAgain){
+                            System.out.println("Would you like to Input Another Name? (Y/N)");
+                            String choice = input.nextLine(); 
+                            switch(choice) {
+                                case "Y":
+                                    volunteerFound = false;
+                                    tryAgain = true;
+                                    break;
+                                case "N":
+                                volunteerFound = true;
+                                tryAgain = true;
+                                    break;    
+                                default:
+                                    System.out.println("Please enter Y or N ");
+                                    volunteerFound = false;
+                                    tryAgain = false;
+                                    break ;    
+                            }
+                        }
+                    }
+                    break; 
+                case "d": 
+                    System.out.println("Task and Volunnterr"); 
+                    //report.listVolunteersAndTasks(null);
+                    reportGiven = true;
+                    break;
+                default: 
+                    break; 
+                }
+                
+                boolean tryAgain = false;
+                while (!tryAgain){
+                    System.out.println("Would you like to print another report? (Y/N)");
+                    String answer = input.nextLine(); 
+                    switch (answer) {
+                        case "Y":
+                            reportGiven = false;  
+                            tryAgain = true;
+                            break;
+                        case "N": 
+                            reportGiven = true;
+                            tryAgain = true;
+                            break;
+                        default:
+                            System.out.println("Option given isn't valid input");
+                            break;
+                    }
+                }
+            }
+            input.close();
+
+	    }
 
 	private static void displayMainMenu() {
 		System.out.println("1) Task Management");
