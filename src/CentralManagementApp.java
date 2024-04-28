@@ -50,8 +50,10 @@ public class CentralManagementApp {
 
 	// Case 1: Task Management
 	private static void manageTasks() {
-		
-		System.out.println(taskScheduler.getTasks()); // Display all tasks
+		if (taskScheduler.anyTasksAvailable()) 
+			System.out.println(taskScheduler.getTasks()); // Display all tasks
+		else	
+			System.out.println("No tasks available");
 		System.out.println();
 		taskScheduler.printSchedule(); // Display ongoing assignments
 		
