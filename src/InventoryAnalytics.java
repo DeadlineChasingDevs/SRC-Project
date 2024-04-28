@@ -71,4 +71,22 @@ public class InventoryAnalytics {
 		}
 		return turnoverRate = soldGoodsValue / valInventory;
 	}
+
+	public Product geProduct(String product) {
+		if (inventory.contains(product)) {
+			int next = 0;
+			boolean found = false;
+
+			while (next < inventory.size() && !found) {
+				Product nextItem = inventory.get(next);
+
+				if (product.equals(nextItem.getName())) {
+					found = true;
+					return nextItem;
+				}
+				next++;
+			}
+		}
+		return null;
+	}
 }
