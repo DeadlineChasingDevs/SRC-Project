@@ -10,7 +10,7 @@ public class Volunteer {
     public List<Task> getAssignedTasks() {
         return assignedTasks;
     }
-    
+
     public Volunteer(String name) {
         this.name = name;
         this.assignedTasks = new ArrayList<>();
@@ -31,25 +31,24 @@ public class Volunteer {
     // Method to print the volunteer's assigned tasks
     public void printAssignedTasks() {
         if (assignedTasks.isEmpty()) {
-        System.out.println("No tasks assigned to " + name);
-    } else {
-        System.out.println(name + "'s Assigned Tasks:");
-        for (Task task : assignedTasks) {
-            System.out.println(task);
+            System.out.println("No tasks assigned to " + name);
+        } else {
+            for (Task task : assignedTasks) {
+                System.out.println(task);
+            }
         }
-    }
-        
+        System.out.println();
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-
 
     public String toString() {
         return "Volunteer: " + name;
     }
-     public void setRating(double rating) {
+
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
