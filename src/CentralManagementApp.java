@@ -15,11 +15,13 @@ public class CentralManagementApp {
 	
 	public static void main(String[] args) {
 		boolean isRunning = true;
+		String choice;
 		Scanner scan = new Scanner(System.in);
 		
 		while (isRunning) {
 			displayMainMenu();
-			String choice = scan.nextLine();
+			choice = scan.nextLine();
+			System.out.println();
 			
 			switch (choice) {
 				case "1": 
@@ -39,8 +41,8 @@ public class CentralManagementApp {
 					break;
 				default:
 					System.out.print("Please try again: ");
+				}
 			}
-		}
 		scan.close();
 		System.out.println("Closing application...");
 		System.out.println();
@@ -48,15 +50,15 @@ public class CentralManagementApp {
 
 	// Case 1: Task Management
 	private static void manageTasks() {
-		Scanner scan = new Scanner(System.in);
-
+		
 		System.out.println(taskScheduler.getTasks()); // Display all tasks
 		System.out.println();
 		taskScheduler.printSchedule(); // Display ongoing assignments
-
+		
 		boolean isManagingTasks = true;
 		
 		while (isManagingTasks) {
+			Scanner scan = new Scanner(System.in);
 			System.out.println();
 			System.out.println("1) Schedule a new Task");
 			System.out.println("2) Manage Volunteers");
@@ -116,7 +118,6 @@ public class CentralManagementApp {
 					break;
 			}
 		}
-		scan.close();
 	}
 
 	// Case 2: Crop Management
@@ -127,10 +128,10 @@ public class CentralManagementApp {
 
 	// Case 3: Report Generator
 	private static void generateReport() {
-		Scanner input = new Scanner(System.in);
 		boolean viewingReports = true;
 		
 		while (viewingReports) {
+			Scanner input = new Scanner(System.in);
 			System.out.println();
 			System.out.println("1) Crop Growth Report");
 			System.out.println("2) Task Completion Report");
@@ -161,11 +162,16 @@ public class CentralManagementApp {
 				case "3": 
 					System.out.print("Enter Volunteer's Name: ");
 					String volunteerName = input.nextLine(); 
+					Volunteer person = null;
 					boolean volunteerFound = false;
-				
-					for (Volunteer person : taskScheduler.getVolunteers()) {
-						if (person.getName().equalsIgnoreCase(volunteerName))
+					int next = 0;
+
+					List<Volunteer> volunteers = taskScheduler.getVolunteers();
+					while (!volunteerFound && next < volunteers.size()) {
+						person = volunteers.get(next);
+						if (volunteerName.equalsIgnoreCase(person.getName())) {
 							volunteerFound = true;
+						}
 					}
 
 					if (volunteerFound) {
@@ -174,6 +180,7 @@ public class CentralManagementApp {
 					}
 					else
 						System.out.println("Volunteer Not Found");
+
 					break; 
 
 				// Volunteers and Tasks Report
@@ -190,17 +197,16 @@ public class CentralManagementApp {
 					break; 
 			}
 		}
-		input.close();
 	}
 
 	// Case 4: Inventory Management
 	private static void manageInventory() {
-		Scanner scan = new Scanner(System.in);
-
+		
 		inventory.getInventory(); // Display current inventory
 		boolean isManagingInventory = true;
-
+		
 		while (isManagingInventory) {
+			Scanner scan = new Scanner(System.in);
 			System.out.println();
 			System.out.println("1) Add a Product");
 			System.out.println("2) Remove a Product");
@@ -217,7 +223,7 @@ public class CentralManagementApp {
 				// Add a product
 				case "1":
 					System.out.print("Enter product name: ");
-					String product = scan.nextLine();
+					String addProduct = scan.nextLine();
 					System.out.print("Enter quantity of product: ");
 					int quantity = scan.nextInt();
 					System.out.print("Enter amount sold: ");
@@ -229,18 +235,18 @@ public class CentralManagementApp {
 					System.out.print("Enter the $ amount invested into product: ");
 					double invested = scan.nextDouble();
 
-					inventory.addProduct(new Product(product, quantity, sold, price, invested, expire));
+					inventory.addProduct(new Product(addProduct, quantity, sold, price, invested, expire));
 					break;
 
 				// Remove a product
 				case "2":
 					System.out.print("Enter product name: ");
-					String product = scan.nextLine();
+					String removeProduct = scan.nextLine();
 
-					Product target = inventory.getProduct(product);
+					Product removeTarget = inventory.getProduct(removeProduct);
 
-					if (target != null)
-						inventory.removeProduct(target);
+					if (removeTarget != null)
+						inventory.removeProduct(removeTarget);
 					else
 						System.out.println("Product not found.");
 
@@ -249,11 +255,11 @@ public class CentralManagementApp {
 				// Modify Product Details
 				case "3":
 					System.out.print("Enter to-be-modified product name: ");
-					String product = scan.nextLine();
-					Product target = inventory.getProduct(product);
+					String modifyProduct = scan.nextLine();
+					Product modifyTarget = inventory.getProduct(modifyProduct);
 					boolean modifyingProduct = true;
 
-					if (target == null)
+					if (modifyTarget == null)
 						System.out.println("Product not found.");
 					
 					while (modifyingProduct) {
@@ -269,29 +275,29 @@ public class CentralManagementApp {
 							// Sell Price
 							case "1":
 								System.out.print("What is the new sell price? ");
-								int price = scan.nextInt();
-								target.setSellPrice(price);
+								int newPrice = scan.nextInt();
+								modifyTarget.setSellPrice(newPrice);
 								break;
 								
 							// Quantity Available
 							case "2":
 								System.out.print("How much product is available? ");
-								int quantity = scan.nextInt();
-								target.setQuantity(quantity);
+								int newQuantity = scan.nextInt();
+								modifyTarget.setQuantity(newQuantity);
 								break; 
 	
 							// Amount Invested
 							case "3":
 								System.out.print("How much $ has been invested? ");
-								int value = scan.nextInt();
-								target.setAmtInvested(value);
+								int newValue = scan.nextInt();
+								modifyTarget.setAmtInvested(newValue);
 								break; 
 	
 							// Expiration Date
 							case "4":
 								System.out.print("How many days until the product expires? ");
-								int days = scan.nextInt();
-								target.setExpiration(expire);
+								int newDays = scan.nextInt();
+								modifyTarget.setExpiration(newDays);
 								break; 
 	
 							// Exit Modification Menu
@@ -308,16 +314,16 @@ public class CentralManagementApp {
 				// Sell product
 				case "4":
 					System.out.print("Enter purchased product name: ");
-					String product = scan.nextLine();
-					Product target = inventory.getProduct(product);
+					String productSoldName = scan.nextLine();
+					Product targetSold = inventory.getProduct(productSoldName);
 
-					if (target == null)
+					if (targetSold == null)
 						System.out.println("Product not found.");
 					
 					System.out.print("Enter amount sold");
-					int sold = scan.nextInt();
+					int soldAmount = scan.nextInt();
 
-					inventory.sellItem(target, sold);
+					inventory.sellItem(targetSold, soldAmount);
 
 					break;
 
@@ -330,8 +336,6 @@ public class CentralManagementApp {
 
 				// See turnover tate and inventory worth
 				case "6":
-					inventory.calcTurnoverRate();
-					inventory.calcValInventory();
 					System.out.println("Inventory Turnover Rate: " + inventory.getTurnoverRate());
 					System.out.println("Amount Invested into Inventory: " + inventory.getValInventory());
 					break;
@@ -350,10 +354,10 @@ public class CentralManagementApp {
 					break;
 			}
 		}
-		scan.close();
 	}
 
 	private static void displayMainMenu() {
+		System.out.println();
 		System.out.println("Lopez Urban Farm Management App 1.0");
 		System.out.println("-----------------------------------");
 		System.out.println("1) Task Management");
