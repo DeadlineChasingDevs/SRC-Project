@@ -195,7 +195,7 @@ public class CentralManagementApp {
 			System.out.println("2) Remove a Product");
 			System.out.println("3) Modify Product Details");
 			System.out.println("4) Sell an Item");
-			System.out.println("5) See Revenue, Profits, and Expenses");
+			System.out.println("5) See Revenue and Expenses");
 			System.out.println("6) See Turnover Rate and Inventory Worth");
 			System.out.println("7) View Inventory");
 			System.out.println("8) Return to Main Menu");
@@ -234,13 +234,77 @@ public class CentralManagementApp {
 					break;
 
 				case "3":
+					System.out.print("Enter to-be-modified product name: ");
+					String product = scan.nextLine();
+					Product target = inventory.getProduct(product);
+					boolean modifyingProduct = true;
 
+					if (target == null)
+						System.out.println("Product not found.");
+					
+					while (modifyingProduct) {
+						System.out.println("1) Sell Price");
+						System.out.println("2) Quantity Available");
+						System.out.println("3) $ Amount Invested to Product");
+						System.out.println("4) Expiration Date");
+						System.out.println("5) Exit Menu");
+						System.out.print("What would you like to modify? ");
+						String modOption = scan.nextLine();
+	
+						switch (modOption) {
+							case "1":
+								System.out.print("What is the new sell price? ");
+								int price = scan.nextInt();
+								target.setSellPrice(price);
+								break;
+								
+							case "2":
+								System.out.print("How much product is available? ");
+								int quantity = scan.nextInt();
+								target.setQuantity(quantity);
+								break; 
+	
+							case "3":
+								System.out.print("How much $ has been invested? ");
+								int value = scan.nextInt();
+								target.setAmtInvested(value);
+								break; 
+	
+							case "4":
+								System.out.print("How many days until the product expires? ");
+								int days = scan.nextInt();
+								target.setExpiration(expire);
+								break; 
+	
+							case "5":
+								modifyingProduct = false;
+								break; 
+	
+							default:
+								break;
+						}		
+					}
 					break;
 
 				case "4":
+					System.out.print("Enter purchased product name: ");
+					String product = scan.nextLine();
+					Product target = inventory.getProduct(product);
+
+					if (target == null)
+						System.out.println("Product not found.");
+					
+					System.out.print("Enter amount sold");
+					int sold = scan.nextInt();
+
+					inventory.sellItem(target, sold);
+
 					break;
 
 				case "5":
+					System.out.println("Revenue: " + inventory.getRevenue());
+					System.out.println("Expenses: " + inventory.getExpenses());
+					System.out.println("Calculated Profits: " + inventory.getProfits());
 					break;
 
 				case "6":
