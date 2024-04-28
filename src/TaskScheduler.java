@@ -34,6 +34,10 @@ public class TaskScheduler {
     public List<Task> getTasks() {
         return tasks;
     }
+
+    public boolean anyTasksAvailable() {
+        return tasks.size() > 0;
+    }
     
     // Method to schedule a task
     public void scheduleTask(Task task) {
