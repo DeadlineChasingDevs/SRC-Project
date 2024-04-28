@@ -1,10 +1,17 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class TaskSchedulerDemo {
     public static void main(String[] args) {
         TaskScheduler scheduler = new TaskScheduler();
+        List<String> resources = new ArrayList<>();
+        resources.add("Shovel");
+        resources.add("Boots");
+
 
         // Add tasks
-        Task task1 = new Task("Harvesting", 1);
-        Task task2 = new Task("Gardening", 2);
+        Task task1 = new Task("Harvesting", 1, 6, resources);
+        Task task2 = new Task("Gardening", 2, 2, resources);
         scheduler.addTask(task1);
         scheduler.addTask(task2);
 
@@ -26,8 +33,8 @@ public class TaskSchedulerDemo {
 
         volunteer1.removeTask(task1);
 
-        Task task3 = new Task("Maintenance", 1);
-        Task task4 = new Task("Livestock", 2);
+        Task task3 = new Task("Maintenance", 1, 5, resources);
+        Task task4 = new Task("Livestock", 2, 10, resources);
 
         scheduler.addTask(task3);
         scheduler.addTask(task4);
