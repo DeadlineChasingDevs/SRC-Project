@@ -64,28 +64,25 @@ public class InventoryAnalytics {
 
 	public double getTurnoverRate() {
 		double soldGoodsValue = 0.0;
-		double turnoverRate = 0.0;
 
 		for (Product product : inventory) {
 			soldGoodsValue += product.getSold() * product.getSellPrice();
 		}
-		return turnoverRate = soldGoodsValue / getValInventory();
+		return soldGoodsValue / getValInventory(); // turnover rate
 	}
 
 	public Product getProduct(String product) {
-		if (inventory.contains(product)) {
-			int next = 0;
-			boolean found = false;
+		int next = 0;
+		boolean found = false;
 
-			while (next < inventory.size() && !found) {
-				Product nextItem = inventory.get(next);
+		while (next < inventory.size() && !found) {
+			Product nextItem = inventory.get(next);
 
-				if (product.equals(nextItem.getName())) {
-					found = true;
-					return nextItem;
-				}
-				next++;
+			if (product.equals(nextItem.getName())) {
+				found = true;
+				return nextItem;
 			}
+			next++;
 		}
 		return null;
 	}
