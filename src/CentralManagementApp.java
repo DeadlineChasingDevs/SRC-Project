@@ -135,7 +135,7 @@ public class CentralManagementApp {
 			String choice = input.nextLine();
 
 			switch (choice) {
-				case "a":
+				case "1":
 					boolean cropsEmpty = (cropManager.getCrops()).isEmpty();
 					if (cropsEmpty) {
 						System.out.println("Crop List Empty");
@@ -145,11 +145,11 @@ public class CentralManagementApp {
 					}
 					break; 
 
-				case "b": 
+				case "2": 
 					report.generateTaskCompletionReport(taskScheduler);
 					break;
 
-				case "c": 
+				case "3": 
 					System.out.print("Enter Volunteer's Name: ");
 					String volunteerName = input.nextLine(); 
 					boolean volunteerFound = false;
@@ -167,11 +167,11 @@ public class CentralManagementApp {
 						System.out.println("Volunteer Not Found");
 					break; 
 
-				case "d": 
+				case "4": 
 					report.listVolunteersAndTasks(taskScheduler.getVolunteers());
 					break;
 
-				case "e":
+				case "5":
 					viewingReports = false;
 					break;
 					
@@ -234,7 +234,7 @@ public class CentralManagementApp {
 					break;
 
 				case "3":
-					
+
 					break;
 
 				case "4":
