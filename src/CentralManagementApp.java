@@ -17,11 +17,7 @@ public class CentralManagementApp {
 		Scanner scan = new Scanner(System.in);
 		
 		while (isRunning) {
-			System.out.println("Lopez Urban Farm Management App 1.0");
-           		System.out.println("-----------------------------------");
-			
-            		displayMainMenu();
-			
+			displayMainMenu();
 			String choice = scan.nextLine();
 			
 			switch (choice) {
@@ -35,15 +31,16 @@ public class CentralManagementApp {
 					generateReport();
 					break;
 				case "4":
+					manageInventory();
+					break;
+				case "5":
 					isRunning = false;
 					break;
 				default:
 					System.out.print("Please try again: ");
 			}
 		}
-
 		scan.close();
-		
 		System.out.println("Closing application...");
 		System.out.println();
 	}
@@ -55,15 +52,16 @@ public class CentralManagementApp {
 		System.out.println();
 		taskScheduler.printSchedule(); // Display ongoing assignments
 
-		System.out.println("1) Schedule a new Task");
-		System.out.println("2) Manage Volunteers");
-		System.out.println("3) Return to Main Menu");
-		System.out.println("Enter number choice: ");
-		String choice = scan.nextLine();
-
 		boolean isManagingTasks = true;
-
+		
 		while (isManagingTasks) {
+			System.out.println();
+			System.out.println("1) Schedule a new Task");
+			System.out.println("2) Manage Volunteers");
+			System.out.println("3) Return to Main Menu");
+			System.out.print("Enter number choice: ");
+			String choice = scan.nextLine();
+
 			switch (choice) {
 				case "1":
 					System.out.print("Enter new task name: ");
@@ -77,14 +75,14 @@ public class CentralManagementApp {
 					}
 					System.out.print("Enter task priority: ");
 					int priority = scan.nextInt();
-					System.out.println("How many volunteers needed for task? ");
+					System.out.print("How many volunteers needed for task? ");
 					int volunteersNeeded = scan.nextInt();
 
 					Task newTask = new Task(taskName, priority, volunteersNeeded, resources)
 	
 					taskScheduler.scheduleTask(newTask);
 
-					System.out.println("Would you like to assign this task to the next available Volunteer? (Y/N)");
+					System.out.print("Would you like to assign this task to the next available Volunteer (Y/N)? ");
 					boolean assigned = scan.nextLine().equalsIgnoreCase("Y");
 					if (assigned)
 						taskScheduler.assignTaskToVolunteer(newTask, taskScheduler.getNextVolunteer());
@@ -102,8 +100,8 @@ public class CentralManagementApp {
 				default:
 					break;
 			}
-			System.out.println("Enter number choice: ");
 		}
+		scan.close();
 	}
 
 	private static void manageCrops() {
@@ -111,107 +109,80 @@ public class CentralManagementApp {
 		// ...
 	}
 
-		private static void generateReport() {
+	private static void generateReport() {
         Scanner input = new Scanner(System.in);
-        boolean reportGiven = false;
-        boolean retry;
-        while (!reportGiven) {
-            retry = false;
-            System.out.println(" Select Desired Report:\n a) Crop Growth Report \n b) Task Completion Report \n c) Volunteer Rating Report \n d) Volunteers and Task Report");
-            String option = input.nextLine();
-            switch(option) {
+        boolean viewingReports = true;
+		
+        while (viewingReports) {
+			System.out.println();
+			System.out.println("a) Crop Growth Report");
+			System.out.println("b) Task Completion Report");
+			System.out.println("c) Volunteer Rating Survey");
+			System.out.println("d) Volunteers and Task Report");
+			System.out.println("e) Return to Main Menu");
+			System.out.print("Select Desired Report letter: ");
+            String choice = input.nextLine();
+
+            switch (choice) {
                 case "a":
-                    boolean listEty = (cropManager.getCrops()).isEmpty();
-                    if(listEty){
-                        System.out.println("Generating Report");
-                        report.generateCropGrowthReport(cropManager.getCrops());
-                        reportGiven= true;
-                        break;
-                    }
-
-                    System.out.println("Crop List Empty");
+                    boolean cropsEmpty = (cropManager.getCrops()).isEmpty();
+					if (cropsEmpty) {
+						System.out.println("Crop List Empty");
+					} 
+					else {
+						report.generateCropGrowthReport(cropManager.getCrops());
+					}
                     break; 
+
                 case "b": 
-                    report.generateTaskCompletionReport(taskScheduler);
-                    reportGiven = true;
+					report.generateTaskCompletionReport(taskScheduler);
                     break;
+
                 case "c": 
-                    boolean volunteerFound =false;
-                    while(!volunteerFound){
-                        System.out.println("Enter Volunteer's Name");
-                        String gnInput= input.nextLine(); 
-                    
-                        for(Volunteer person: taskScheduler.getVolunteers()){
-                            if((person.getName()).equalsIgnoreCase(gnInput)){
-                                System.out.println("Volunteer Found");
-                                System.out.println("Generating Report");
-                                report.rateVolunteer(person);
-                                reportGiven = true;
-                                break;
-                            }
-                        }
+					System.out.print("Enter Volunteer's Name: ");
+					String volunteerName = input.nextLine(); 
+					boolean volunteerFound = false;
+				
+					for (Volunteer person : taskScheduler.getVolunteers()) {
+						if (person.getName().equalsIgnoreCase(volunteerName))
+							volunteerFound = true;
+					}
 
-                        System.out.println("Volunteer Not Found");
-
-                        boolean tryAgain = false;
-                        while (!tryAgain){
-                            System.out.println("Would you like to Input Another Name? (Y/N)");
-                            String choice = input.nextLine(); 
-                            switch(choice) {
-                                case "Y":
-                                    volunteerFound = false;
-                                    tryAgain = true;
-                                    break;
-                                case "N":
-                                    volunteerFound = true;
-                                    tryAgain = true;
-                                    break;    
-                                default:
-                                    System.out.println("Please enter Y or N ");
-                                    volunteerFound = false;
-                                    tryAgain = false;
-                                    break ;    
-                            }
-                        }
-                    }
+					if (volunteerFound) {
+						System.out.println("Volunteer Found...");
+						report.rateVolunteer(person);
+					}
+					else
+						System.out.println("Volunteer Not Found");
                     break; 
+
                 case "d": 
                     report.listVolunteersAndTasks(taskScheduler.getVolunteers());
-                    reportGiven = true;
                     break;
-                default: 
-                    retry = true;
-                    break; 
-                }
-                
-                
-                while (!retry){
-                    System.out.println("Would you like to print another report? (Y/N)");
-                    String answer = input.nextLine(); 
-                    switch (answer) {
-                        case "Y":
-                            reportGiven = false;  
-                            retry = true;
-                            break;
-                        case "N": 
-                            reportGiven = true;
-                            retry = true;
-                            break;
-                        default:
-                            System.out.println("Option given isn't valid input");
-                            break;
-                    }
-                }
-            }
-            input.close();
 
-	    }
+				case "e":
+					viewingReports = false;
+					break;
+					
+                default: 
+                    break; 
+			}
+		}
+		input.close();
+	}
+
+	private static void manageInventory() {
+		//
+	}
 
 	private static void displayMainMenu() {
+		System.out.println("Lopez Urban Farm Management App 1.0");
+		System.out.println("-----------------------------------");
 		System.out.println("1) Task Management");
 		System.out.println("2) Crop Management");
 		System.out.println("3) Farm Report");
-		System.out.println("4) Exit");
+		System.out.println("4) Inventory Analytics");
+		System.out.println("5) Exit");
 		System.out.println();
 
 		System.out.print("Enter number choice: ");
