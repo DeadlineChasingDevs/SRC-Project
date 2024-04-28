@@ -23,4 +23,8 @@ public class CropManager {
             System.out.println(crop);
         }
     }
+
+    public List<Crop> getCrops(){
+        return crops;
+    }
 }
