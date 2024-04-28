@@ -111,22 +111,28 @@ public class CentralManagementApp {
 		// ...
 	}
 
-	private static void generateReport() {
+		private static void generateReport() {
         Scanner input = new Scanner(System.in);
         boolean reportGiven = false;
+        boolean retry;
         while (!reportGiven) {
-
+            retry = false;
             System.out.println(" Select Desired Report:\n a) Crop Growth Report \n b) Task Completion Report \n c) Volunteer Rating Report \n d) Volunteers and Task Report");
             String option = input.nextLine();
             switch(option) {
                 case "a":
-                System.out.println("Crop"); 
-                    //report.generateCropGrowthReport(null);
-                    reportGiven = true;
-                    break;
+                    boolean listEty = (cropManager.getCrops()).isEmpty();
+                    if(listEty){
+                        System.out.println("Generating Report");
+                        report.generateCropGrowthReport(cropManager.getCrops());
+                        reportGiven= true;
+                        break;
+                    }
+
+                    System.out.println("Crop List Empty");
+                    break; 
                 case "b": 
-                    System.out.println("Task"); 
-                    //report.generateTaskCompletionReport(taskScheduler);
+                    report.generateTaskCompletionReport(taskScheduler);
                     reportGiven = true;
                     break;
                 case "c": 
@@ -157,8 +163,8 @@ public class CentralManagementApp {
                                     tryAgain = true;
                                     break;
                                 case "N":
-                                volunteerFound = true;
-                                tryAgain = true;
+                                    volunteerFound = true;
+                                    tryAgain = true;
                                     break;    
                                 default:
                                     System.out.println("Please enter Y or N ");
@@ -170,26 +176,26 @@ public class CentralManagementApp {
                     }
                     break; 
                 case "d": 
-                    System.out.println("Task and Volunnterr"); 
-                    //report.listVolunteersAndTasks(null);
+                    report.listVolunteersAndTasks(taskScheduler.getVolunteers());
                     reportGiven = true;
                     break;
                 default: 
+                    retry = true;
                     break; 
                 }
                 
-                boolean tryAgain = false;
-                while (!tryAgain){
+                
+                while (!retry){
                     System.out.println("Would you like to print another report? (Y/N)");
                     String answer = input.nextLine(); 
                     switch (answer) {
                         case "Y":
                             reportGiven = false;  
-                            tryAgain = true;
+                            retry = true;
                             break;
                         case "N": 
                             reportGiven = true;
-                            tryAgain = true;
+                            retry = true;
                             break;
                         default:
                             System.out.println("Option given isn't valid input");
