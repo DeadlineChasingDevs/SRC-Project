@@ -14,8 +14,8 @@
     - TaskScheduler.java
   
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
- - Report
- - Volunteer.java, Task.java
+ - Report.java
+ - Volunteer.java, Task.java, Crop.java
  
 **Member**: Eric Pham (@1hperic) (ericpham@cpp.edu)
 
