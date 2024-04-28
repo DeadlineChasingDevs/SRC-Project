@@ -16,19 +16,20 @@ public class ReportGenerator {
         System.out.printf("%-20s%-20s%-20s%-20s%n", "Crop", "Planting Date", "Harvest Date", "Expiration Date");
         System.out.println("--------------------------------------------------");
         for (Crop crop : crops) {
-            String plantingDate = crop.getPlantingDate() != null ?
-                                  crop.getPlantingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
-                                  "Not set";
-            String harvestDate = crop.getHarvestDate() != null ?
-                                 crop.getHarvestDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
-                                 "Not set";
-            String expirationDate = crop.calculateExpirationDate() != null ?
-                                     crop.calculateExpirationDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) :
-                                     "Not set";
+            String plantingDate = crop.getPlantingDate() != null
+                    ? crop.getPlantingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    : "Not set";
+            String harvestDate = crop.getHarvestDate() != null
+                    ? crop.getHarvestDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    : "Not set";
+            String expirationDate = crop.calculateExpirationDate() != null
+                    ? crop.calculateExpirationDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    : "Not set";
             System.out.printf("%-20s%-20s%-20s%-20s%n", crop.getName(), plantingDate, harvestDate, expirationDate);
         }
         System.out.println("--------------------------------------------------");
     }
+
     // Method to generate task completion report
     public void generateTaskCompletionReport(TaskScheduler taskScheduler) {
         System.out.println("Task Completion Report:");
@@ -57,19 +58,19 @@ public class ReportGenerator {
     }
 
     // Method to generate volunteer performance report
-     public void rateVolunteer(Volunteer volunteer) {
+    public void rateVolunteer(Volunteer volunteer) {
         System.out.print("Rate volunteer " + volunteer.getName() + " (1 to 5): ");
         double rating = scanner.nextDouble();
         scanner.nextLine();
         if (rating < 2.5) {
             System.out.println("Volunteer rated below 2.5. Do not assign tasks to them again.");
-        }else {
-                    System.out.print("Provide feedback to volunteer " + volunteer.getName() + ": ");
-                    String feedback = scanner.nextLine();
-                    // Store the feedback
-                    volunteer.setFeedback(feedback);
-                }
-         System.out.println("--------------------------------------------------");
+        } else {
+            System.out.print("Provide feedback to volunteer " + volunteer.getName() + ": ");
+            String feedback = scanner.nextLine();
+            // Store the feedback
+            volunteer.setFeedback(feedback);
+        }
+        System.out.println("--------------------------------------------------");
     }
 
     // Method to list volunteers and their assigned tasks with expected finish times
@@ -81,13 +82,13 @@ public class ReportGenerator {
                 System.out.println("No tasks assigned.");
             } else {
                 for (Task task : volunteer.getAssignedTasks()) {
-                    System.out.println("- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
+                    System.out.println(
+                            "- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
                 }
             }
         }
         System.out.println("--------------------------------------------------");
     }
-
 
     public void closeScanner() {
         scanner.close();
