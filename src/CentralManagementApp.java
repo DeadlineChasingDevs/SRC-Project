@@ -110,10 +110,10 @@ public class CentralManagementApp {
 	}
 
 	private static void generateReport() {
-        Scanner input = new Scanner(System.in);
-        boolean viewingReports = true;
+		Scanner input = new Scanner(System.in);
+		boolean viewingReports = true;
 		
-        while (viewingReports) {
+		while (viewingReports) {
 			System.out.println();
 			System.out.println("a) Crop Growth Report");
 			System.out.println("b) Task Completion Report");
@@ -121,24 +121,24 @@ public class CentralManagementApp {
 			System.out.println("d) Volunteers and Task Report");
 			System.out.println("e) Return to Main Menu");
 			System.out.print("Select Desired Report letter: ");
-            String choice = input.nextLine();
+			String choice = input.nextLine();
 
-            switch (choice) {
-                case "a":
-                    boolean cropsEmpty = (cropManager.getCrops()).isEmpty();
+			switch (choice) {
+				case "a":
+					boolean cropsEmpty = (cropManager.getCrops()).isEmpty();
 					if (cropsEmpty) {
 						System.out.println("Crop List Empty");
 					} 
 					else {
 						report.generateCropGrowthReport(cropManager.getCrops());
 					}
-                    break; 
+					break; 
 
-                case "b": 
+				case "b": 
 					report.generateTaskCompletionReport(taskScheduler);
-                    break;
+					break;
 
-                case "c": 
+				case "c": 
 					System.out.print("Enter Volunteer's Name: ");
 					String volunteerName = input.nextLine(); 
 					boolean volunteerFound = false;
@@ -154,18 +154,18 @@ public class CentralManagementApp {
 					}
 					else
 						System.out.println("Volunteer Not Found");
-                    break; 
+					break; 
 
-                case "d": 
-                    report.listVolunteersAndTasks(taskScheduler.getVolunteers());
-                    break;
+				case "d": 
+					report.listVolunteersAndTasks(taskScheduler.getVolunteers());
+					break;
 
 				case "e":
 					viewingReports = false;
 					break;
 					
-                default: 
-                    break; 
+				default: 
+					break; 
 			}
 		}
 		input.close();
