@@ -72,7 +72,11 @@ public class TaskScheduler {
         }
           
     }
-
+    
+    public Queue<Volunteer> getVolunteers() {
+        return volunteers;
+    }
+    
     public Volunteer getNextVolunteer() {
         return volunteers.peek();
     }
