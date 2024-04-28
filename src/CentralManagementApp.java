@@ -11,6 +11,7 @@ public class CentralManagementApp {
 	private static TaskScheduler taskScheduler = new TaskScheduler();
 	private static CropManager cropManager = new CropManager();
 	private static ReportGenerator report = new ReportGenerator();
+	private static InventoryAnalytics inventory = new InventoryAnalytics();
 	
 	public static void main(String[] args) {
 		boolean isRunning = true;
@@ -45,6 +46,7 @@ public class CentralManagementApp {
 		System.out.println();
 	}
 
+	// Case 1: Task Management
 	private static void manageTasks() {
 		Scanner scan = new Scanner(System.in);
 
@@ -58,7 +60,8 @@ public class CentralManagementApp {
 			System.out.println();
 			System.out.println("1) Schedule a new Task");
 			System.out.println("2) Manage Volunteers");
-			System.out.println("3) Return to Main Menu");
+			System.out.println("3) View Tasks and Schedule");
+			System.out.println("4) Return to Main Menu");
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 
@@ -92,8 +95,14 @@ public class CentralManagementApp {
 				case "2":
 
 					break;
-	
+
 				case "3":
+					System.out.println(taskScheduler.getTasks());
+					System.out.println();
+					taskScheduler.printSchedule();
+					break;
+	
+				case "4":
 					isManagingTasks = false;
 					break;
 	
@@ -104,23 +113,25 @@ public class CentralManagementApp {
 		scan.close();
 	}
 
+	// Case 2: Crop Management
 	private static void manageCrops() {
 		System.out.println("Crop Management");
 		// ...
 	}
 
+	// Case 3: Report Generator
 	private static void generateReport() {
 		Scanner input = new Scanner(System.in);
 		boolean viewingReports = true;
 		
 		while (viewingReports) {
 			System.out.println();
-			System.out.println("a) Crop Growth Report");
-			System.out.println("b) Task Completion Report");
-			System.out.println("c) Volunteer Rating Survey");
-			System.out.println("d) Volunteers and Task Report");
-			System.out.println("e) Return to Main Menu");
-			System.out.print("Select Desired Report letter: ");
+			System.out.println("1) Crop Growth Report");
+			System.out.println("2) Task Completion Report");
+			System.out.println("3) Volunteer Rating Survey");
+			System.out.println("4) Volunteers and Task Report");
+			System.out.println("5) Return to Main Menu");
+			System.out.print("Enter number choice: ");
 			String choice = input.nextLine();
 
 			switch (choice) {
@@ -171,8 +182,87 @@ public class CentralManagementApp {
 		input.close();
 	}
 
+	// Case 4: Inventory Management
 	private static void manageInventory() {
-		//
+		Scanner scan = new Scanner(System.in);
+
+		inventory.getInventory(); // Display current inventory
+		boolean isManagingInventory = true;
+
+		while (isManagingInventory) {
+			System.out.println();
+			System.out.println("1) Add a Product");
+			System.out.println("2) Remove a Product");
+			System.out.println("3) Modify Product Details");
+			System.out.println("4) Sell an Item");
+			System.out.println("5) See Revenue, Profits, and Expenses");
+			System.out.println("6) See Turnover Rate and Inventory Worth");
+			System.out.println("7) View Inventory");
+			System.out.println("8) Return to Main Menu");
+			System.out.print("Enter number choice: ");
+			String choice = scan.nextLine();
+
+			switch (choice) {
+				case "1":
+					System.out.print("Enter product name: ");
+					String product = scan.nextLine();
+					System.out.print("Enter quantity of product: ");
+					int quantity = scan.nextInt();
+					System.out.print("Enter amount sold: ");
+					int sold = scan.nextInt();
+					System.err.println("Enter number of days until experation: ");
+					int expire = scan.nextInt();
+					System.out.print("Enter sale price: ");
+					double price = scan.nextDouble();
+					System.out.print("Enter the $ amount invested into product: ");
+					double invested = scan.nextDouble();
+
+					inventory.addProduct(new Product(product, quantity, sold, price, invested, expire));
+					break;
+
+				case "2":
+					System.out.print("Enter product name: ");
+					String product = scan.nextLine();
+
+					Product target = inventory.getProduct(product);
+
+					if (target != null)
+						inventory.removeProduct(target);
+					else
+						System.out.println("Product not found.");
+
+					break;
+
+				case "3":
+					
+					break;
+
+				case "4":
+					break;
+
+				case "5":
+					break;
+
+				case "6":
+					inventory.calcTurnoverRate();
+					inventory.calcValInventory();
+					System.out.println("Inventory Turnover Rate: " + inventory.getTurnoverRate());
+					System.out.println("Amount Invested into Inventory: " + inventory.getValInventory());
+					break;
+
+				case "7":
+					inventory.getInventory();
+					break;
+
+				case "8":
+					isManagingInventory = false;
+					break;
+
+				default:
+					break;
+			}
+		}
+		scan.close();
 	}
 
 	private static void displayMainMenu() {
