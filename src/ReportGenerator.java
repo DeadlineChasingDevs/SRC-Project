@@ -86,6 +86,7 @@ public class ReportGenerator {
                             "- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
                 }
             }
+            System.out.println();
         }
         System.out.println("--------------------------------------------------");
     }
