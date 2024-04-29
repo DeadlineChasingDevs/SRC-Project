@@ -564,8 +564,10 @@ public class CentralManagementApp {
 
 		while (!volunteerFound && next < volunteers.size()) {
 			target = volunteers.get(next);
-			if (name.equalsIgnoreCase(target.getName()))
+			if (name.equalsIgnoreCase(target.getName())){
 				volunteerFound = true;
+			}else
+				next++; 
 		}
 
 		if (volunteerFound)
