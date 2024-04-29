@@ -1,7 +1,14 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+* A demonstration class showcasing the usage of the TaskScheduler class.
+*/
 public class TaskSchedulerDemo {
+    /**
+     * Main method to run the TaskScheduler demo.
+     * @param args The command line arguments (not used).
+     */
     public static void main(String[] args) {
         TaskScheduler scheduler = new TaskScheduler();
         List<String> resources = new ArrayList<>();

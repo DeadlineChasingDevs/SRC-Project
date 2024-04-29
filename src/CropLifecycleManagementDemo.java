@@ -1,5 +1,12 @@
-// Main class to demonstrate the functionality of the Crop Lifecycle Management section
+/**
+ * Main class to demonstrate the functionality of the Crop Lifecycle Management section.
+ */
 public class CropLifecycleManagementDemo {
+    /**
+     * Main method to run the demonstration of crop lifecycle management.
+     *
+     * @param args The command line arguments (not used in this demo).
+     */
     public static void main(String[] args) {
         // Instantiate CropManager
         CropManager cropManager = new CropManager();
@@ -22,3 +29,4 @@ public class CropLifecycleManagementDemo {
         cropManager.displayCrops();
     }
 }
+
