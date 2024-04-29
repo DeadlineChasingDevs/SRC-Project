@@ -561,7 +561,9 @@ public class CentralManagementApp {
 		Volunteer target = null;
 		boolean volunteerFound = false;
 		int next = 0;
-
+		
+		taskScheduler.setVolunteerList(volunteers);
+		
 		while (!volunteerFound && next < volunteers.size()) {
 			target = volunteers.get(next);
 			if (name.equalsIgnoreCase(target.getName())){
@@ -585,6 +587,8 @@ public class CentralManagementApp {
 			target = tasks.get(next);
 			if (name.equalsIgnoreCase(target.getName()))
 				taskFound = true;
+			else
+				next++; // Move to the next task
 		}
 
 		if (taskFound)
