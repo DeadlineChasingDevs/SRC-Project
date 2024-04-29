@@ -12,13 +12,13 @@ public class CentralManagementApp {
 	private static CropManager cropManager = new CropManager();
 	private static ReportGenerator report = new ReportGenerator();
 	private static InventoryAnalytics inventory = new InventoryAnalytics();
+	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		initalizeTestValues(); // Set up application with values for Demo purposes
 
 		boolean isRunning = true;
 		String choice;
-		Scanner scan = new Scanner(System.in);
 
 		while (isRunning) {
 			displayMainMenu();
@@ -78,13 +78,11 @@ public class CentralManagementApp {
 		boolean isManagingTasks = true;
 
 		while (isManagingTasks) {
-			Scanner scan = new Scanner(System.in);
-			System.out.println();
-			System.out.println("1) Schedule a new Task");
-			System.out.println("2) Manage Volunteers");
-			System.out.println("3) View All Tasks and Assigned Schedule");
-			System.out.println("4) Return to Main Menu");
-			System.out.println();
+
+			System.out.printf("%n1) Schedule a new Task%n" +
+							  "2) Manage Volunteers%n" +
+							  "3) View All Tasks and Assigned Schedulet%n" +
+							  "4) Return to Main Menu%n%n");
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 			System.out.println();
@@ -119,13 +117,11 @@ public class CentralManagementApp {
 					boolean managingVolunteers = true;
 
 					while (managingVolunteers) {
-						System.out.println();
-						System.out.println("1) Add a new Volunteer");
-						System.out.println("2) Give Feedback and Rating to Volunteer");
-						System.out.println("3) Assign a Task to a Volunteer");
-						System.out.println("4) View Task Assignments");
-						System.out.println("5) Exit Volunteer Management Menu");
-						System.out.println();
+						System.out.printf("%n1) Add a new Volunteer%n" +
+										  "2) Give Feedback and Rating to Volunteer%n" +
+										  "3) Assign a Task to a Volunteer%n" +
+										  "4) View Task Assignments%n" +
+										  "5) Exit Volunteer Management Menu%n%n");
 						System.out.print("Enter number choice: ");
 						String volOption = scan.nextLine();
 						System.out.println();
@@ -222,16 +218,13 @@ public class CentralManagementApp {
 		boolean viewingReports = true;
 
 		while (viewingReports) {
-			Scanner input = new Scanner(System.in);
-			System.out.println();
-			System.out.println("1) Crop Growth Report");
-			System.out.println("2) Task Completion Report");
-			System.out.println("3) Volunteer Rating Survey");
-			System.out.println("4) Volunteers and Tasks Report");
-			System.out.println("5) Return to Main Menu");
-			System.out.println();
+			System.out.printf("%n1) Crop Growth Report%n" +
+							  "2) Task Completion Report%n" +
+							  "3) Volunteer Rating Report%n" +
+							  "4) Volunteers and Tasks Report%n" +
+							  "5) Return to Main Menu%n%n");
 			System.out.print("Enter number choice: ");
-			String choice = input.nextLine();
+			String choice = scan.nextLine();
 			System.out.println();
 
 			switch (choice) {
@@ -277,17 +270,15 @@ public class CentralManagementApp {
 		boolean isManagingInventory = true;
 
 		while (isManagingInventory) {
-			Scanner scan = new Scanner(System.in);
-			System.out.println();
-			System.out.println("1) Add a Product");
-			System.out.println("2) Remove a Product");
-			System.out.println("3) Modify Product Details");
-			System.out.println("4) Sell Product");
-			System.out.println("5) See Revenue and Expenses");
-			System.out.println("6) See Turnover Rate and Inventory Worth");
-			System.out.println("7) View Inventory");
-			System.out.println("8) Return to Main Menu");
-			System.out.println();
+			System.out.printf("%n1) Add a Product%n" +
+							  "2) Remove a Product%n" +
+							  "3) Modify Product Details%n" +
+							  "4) Sell Product%n" +
+							  "5) See Revenue and Expenses%n" +
+							  "6) See Turnover Rate and Inventory Worth%n" +
+							  "7) View Inventory%n" +
+							  "8) Return to Main Menu%n%n"			 
+							  );
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 			System.out.println();
@@ -336,12 +327,10 @@ public class CentralManagementApp {
 						System.out.println("Product not found.");
 
 					while (modifyingProduct) {
-						System.out.println();
-						System.out.println("1) Sell Price");
-						System.out.println("2) Quantity Available");
-						System.out.println("3) Expiration Date");
-						System.out.println("4) Exit Modification Menu");
-						System.out.println();
+						System.out.printf("%n1) Sell Price%n" +
+										  "2) Quantity Available%n" +
+										  "3) Expiration Date%n" +
+										  "4) Exit Modification%n%n");
 						System.out.print("What would you like to modify? ");
 						String modOption = scan.nextLine();
 						System.out.println();
@@ -388,7 +377,7 @@ public class CentralManagementApp {
 					if (targetSold == null)
 						System.out.println("Product not found.");
 
-					System.out.print("Enter amount sold");
+					System.out.print("Enter amount sold: ");
 					int soldAmount = scan.nextInt();
 
 					inventory.sellItem(targetSold, soldAmount);
@@ -425,15 +414,14 @@ public class CentralManagementApp {
 	}
 
 	private static void displayMainMenu() {
-		System.out.println();
-		System.out.println("Lopez Urban Farm Management App 1.0");
-		System.out.println("-----------------------------------");
-		System.out.println("1) Task / Volunteer Management");
-		System.out.println("2) Crop Management");
-		System.out.println("3) Farm Reports");
-		System.out.println("4) Inventory Analytics");
-		System.out.println("5) Exit");
-		System.out.println();
+
+		System.out.printf("%nLopez Urban Farm Management App 1.0%n" +
+						  "-----------------------------------%n" +
+						  "1) Task / Volunteer Management%n" +
+						  "2) Crop Management%n" +
+						  "3) Farm Reports%n" +
+						  "4) Inventory Analytics%n" +
+						  "5) Exit%n%n");
 
 		System.out.print("Enter number choice: ");
 	}
