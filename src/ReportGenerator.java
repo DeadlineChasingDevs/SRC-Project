@@ -62,6 +62,7 @@ public class ReportGenerator {
         System.out.print("Rate volunteer " + volunteer.getName() + " (1 to 5): ");
         double rating = scanner.nextDouble();
         scanner.nextLine();
+        volunteer.setRating(rating);
         if (rating < 2.5) {
             System.out.println("Volunteer rated below 2.5. Do not assign tasks to them again.");
         } else {
@@ -70,6 +71,19 @@ public class ReportGenerator {
             // Store the feedback
             volunteer.setFeedback(feedback);
         }
+        System.out.println("--------------------------------------------------");
+    }
+
+    public void generateVolunteerRatingReport(List<Volunteer> volunteers) {
+        System.out.println("Volunteers and Their Ratings / Feedback");
+
+        for (Volunteer volunteer : volunteers) {
+            System.out.println("Volunteer: " + volunteer.getName());
+            System.out.println("Rating: " + volunteer.getRating());
+            System.out.println("Feedback: " + volunteer.getFeedback());
+            System.out.println();
+        }
+
         System.out.println("--------------------------------------------------");
     }
 
