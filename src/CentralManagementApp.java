@@ -80,9 +80,9 @@ public class CentralManagementApp {
 		while (isManagingTasks) {
 
 			System.out.printf("%n1) Schedule a new Task%n" +
-							  "2) Manage Volunteers%n" +
-							  "3) View All Tasks and Assigned Schedulet%n" +
-							  "4) Return to Main Menu%n%n");
+					"2) Manage Volunteers%n" +
+					"3) View All Tasks and Assigned Schedulet%n" +
+					"4) Return to Main Menu%n%n");
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 			System.out.println();
@@ -118,14 +118,14 @@ public class CentralManagementApp {
 
 					while (managingVolunteers) {
 						System.out.printf("%n1) Add a new Volunteer%n" +
-										  "2) Give Feedback and Rating to Volunteer%n" +
-										  "3) Assign a Task to a Volunteer%n" +
-										  "4) View Task Assignments%n" +
-										  "5) Exit Volunteer Management Menu%n%n");
+								"2) Give Feedback and Rating to Volunteer%n" +
+								"3) Assign a Task to a Volunteer%n" +
+								"4) View Task Assignments%n" +
+								"5) Exit Volunteer Management Menu%n%n");
 						System.out.print("Enter number choice: ");
 						String volOption = scan.nextLine();
 						System.out.println();
-	
+
 						switch (volOption) {
 							// Add volunteer
 							case "1":
@@ -146,7 +146,7 @@ public class CentralManagementApp {
 								else
 									report.rateVolunteer(targetVol);
 								break;
-	
+
 							// Assign task
 							case "3":
 								System.out.print("Enter volunteer name: ");
@@ -167,17 +167,17 @@ public class CentralManagementApp {
 								} else
 									System.out.println("Volunteer Not Found");
 								break;
-	
+
 							// View task assignments
 							case "4":
 								taskScheduler.printSchedule();
 								break;
-	
+
 							// Exit Volunteer Management Menu
 							case "5":
 								managingVolunteers = false;
 								break;
-	
+
 							default:
 								break;
 						}
@@ -219,10 +219,10 @@ public class CentralManagementApp {
 
 		while (viewingReports) {
 			System.out.printf("%n1) Crop Growth Report%n" +
-							  "2) Task Completion Report%n" +
-							  "3) Volunteer Rating Report%n" +
-							  "4) Volunteers and Tasks Report%n" +
-							  "5) Return to Main Menu%n%n");
+					"2) Task Completion Report%n" +
+					"3) Volunteer Rating Report%n" +
+					"4) Volunteers and Tasks Report%n" +
+					"5) Return to Main Menu%n%n");
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 			System.out.println();
@@ -271,14 +271,13 @@ public class CentralManagementApp {
 
 		while (isManagingInventory) {
 			System.out.printf("%n1) Add a Product%n" +
-							  "2) Remove a Product%n" +
-							  "3) Modify Product Details%n" +
-							  "4) Sell Product%n" +
-							  "5) See Revenue and Expenses%n" +
-							  "6) See Turnover Rate and Inventory Worth%n" +
-							  "7) View Inventory%n" +
-							  "8) Return to Main Menu%n%n"			 
-							  );
+					"2) Remove a Product%n" +
+					"3) Modify Product Details%n" +
+					"4) Sell Product%n" +
+					"5) See Revenue and Expenses%n" +
+					"6) See Turnover Rate and Inventory Worth%n" +
+					"7) View Inventory%n" +
+					"8) Return to Main Menu%n%n");
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
 			System.out.println();
@@ -328,9 +327,9 @@ public class CentralManagementApp {
 
 					while (modifyingProduct) {
 						System.out.printf("%n1) Sell Price%n" +
-										  "2) Quantity Available%n" +
-										  "3) Expiration Date%n" +
-										  "4) Exit Modification%n%n");
+								"2) Quantity Available%n" +
+								"3) Expiration Date%n" +
+								"4) Exit Modification%n%n");
 						System.out.print("What would you like to modify? ");
 						String modOption = scan.nextLine();
 						System.out.println();
@@ -416,17 +415,18 @@ public class CentralManagementApp {
 	private static void displayMainMenu() {
 
 		System.out.printf("%nLopez Urban Farm Management App 1.0%n" +
-						  "-----------------------------------%n" +
-						  "1) Task / Volunteer Management%n" +
-						  "2) Crop Management%n" +
-						  "3) Farm Reports%n" +
-						  "4) Inventory Analytics%n" +
-						  "5) Exit%n%n");
+				"-----------------------------------%n" +
+				"1) Task / Volunteer Management%n" +
+				"2) Crop Management%n" +
+				"3) Farm Reports%n" +
+				"4) Inventory Analytics%n" +
+				"5) Exit%n%n");
 
 		System.out.print("Enter number choice: ");
 	}
 
-	// Since data is not saved in between uses, we set up values for Demo purposes for each use
+	// Since data is not saved in between uses, we set up values for Demo purposes
+	// for each use
 	private static void initalizeTestValues() {
 
 		// Volunteers
@@ -475,7 +475,7 @@ public class CentralManagementApp {
 				volunteerFound = true;
 		}
 
-		if (volunteerFound) 
+		if (volunteerFound)
 			return target;
 		return null;
 	}
@@ -492,7 +492,7 @@ public class CentralManagementApp {
 				taskFound = true;
 		}
 
-		if (taskFound) 
+		if (taskFound)
 			return target;
 		return null;
 	}

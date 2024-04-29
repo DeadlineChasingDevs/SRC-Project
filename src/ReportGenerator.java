@@ -96,8 +96,7 @@ public class ReportGenerator {
                 System.out.println("No tasks assigned.");
             } else {
                 for (Task task : volunteer.getAssignedTasks()) {
-                    System.out.println(
-                            "- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
+                    System.out.println("- Task: " + task.getName() + ", Expected Finish Time: " + task.getCompletionTime());
                 }
             }
             System.out.println();
