@@ -1,3 +1,6 @@
+/**
+ * Represents a product with its attributes such as name, quantity, sell price, etc.
+ */
 
 public class Product {
 	private String name;
