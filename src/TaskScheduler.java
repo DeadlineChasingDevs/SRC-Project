@@ -79,18 +79,18 @@ public class TaskScheduler {
      * @param volunteer The volunteer to whom the task will be assigned.
      */
     public void assignTaskToVolunteer(Task task, Volunteer volunteer) {
-        if (!tasks.contains(task)) {
+       /* if (!tasks.contains(task)) {
             System.out.println("Task not found.");
             return;
         }
         if (volunteers.isEmpty()) {
             System.out.println("No volunteers available.");
             return;
-        }
+        }*/
         // Assign the task to the volunteer
         volunteer.assignTask(task);
         tasks.remove(task); // Remove the task from the task list
-        // volunteers.offer(volunteer); // Move the volunteer to the end of the queue
+        volunteers.offer(volunteer); // Move the volunteer to the end of the queue
     }
 
     /**
@@ -123,5 +123,38 @@ public class TaskScheduler {
      */
     public Volunteer getNextVolunteer() {
         return volunteers.peek();
+    }
+
+    /**
+ * Sets the list of volunteers, removing duplicates from the queue.
+ * Existing volunteers in the queue are cleared before adding new ones.
+ * 
+ * @param volunteerList the list of volunteers to set
+ */
+    public void setVolunteerList(List<Volunteer> volunteerList) {
+        // Clear existing volunteers in the queue
+        volunteers.clear();
+        
+        // Add each volunteer from the list to the queue
+        for (Volunteer volunteer : volunteerList) {
+            volunteers.offer(volunteer); // Add to the end of the queue
+        }
+        removeDuplicates(volunteers);
+    }
+    /**
+ * Removes duplicates from the specified queue.
+ * 
+ * @param queue the queue from which duplicates are to be removed
+ * @param <T> the type of elements in the queue
+ */
+    public static <T> void removeDuplicates(Queue<T> queue) {
+        int size = queue.size();
+        for (int i = 0; i < size; i++) {
+            T current = queue.poll();
+            if (!queue.contains(current)) {
+                queue.offer(current);
+            }
+        
+        }
     }
 }
