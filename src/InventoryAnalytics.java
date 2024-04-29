@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class calculates analytics for inventory management, including revenue, profits,
+ * expenses, and inventory turnover rate.
+ */
 public class InventoryAnalytics {
 	private double revenue;
 	private double expenses;
