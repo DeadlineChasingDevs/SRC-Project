@@ -3,10 +3,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * A centralized management app that keeps task scheduling, crop management,
- * farm analytics,
- * and a farm report all in one place, enabling higher farm productivity and
- * efficiency.
+ * A centralized management app that keeps task scheduling, crop management, farm analytics,
+ * and farm reports all in one place, enabling higher farm productivity and efficiency.
  * Note: This is a concept application; data is not saved in between uses.
  */
 public class CentralManagementApp {
@@ -29,8 +27,8 @@ public class CentralManagementApp {
 
 			switch (choice) {
 				case "1":
-					System.out.println("Task Management");
-					System.out.println("---------------");
+					System.out.println("Task / Volunteer Management");
+					System.out.println("---------------------------");
 					manageTasks();
 					break;
 
@@ -41,8 +39,8 @@ public class CentralManagementApp {
 					break;
 
 				case "3":
-					System.out.println("Farm Reports and Surveys");
-					System.out.println("------------------------");
+					System.out.println("Farm Reports");
+					System.out.println("------------");
 					generateReport();
 					break;
 
@@ -57,7 +55,8 @@ public class CentralManagementApp {
 					break;
 
 				default:
-					System.out.print("Please try again: ");
+					System.out.print("Please try again...");
+					System.out.println();
 			}
 		}
 		scan.close();
@@ -69,7 +68,8 @@ public class CentralManagementApp {
 	private static void manageTasks() {
 		if (taskScheduler.anyTasksAvailable()) {
 			System.out.println("Available Tasks");
-			System.out.println(taskScheduler.getTasks()); // Display available tasks
+			for (Task task : taskScheduler.getTasks())
+				System.out.println(task);
 		} else
 			System.out.println("No tasks available");
 		System.out.println();
@@ -87,6 +87,7 @@ public class CentralManagementApp {
 			System.out.println();
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
+			System.out.println();
 
 			switch (choice) {
 				// Schedule a new task
@@ -115,12 +116,86 @@ public class CentralManagementApp {
 
 				// Manage volunteers
 				case "2":
+					boolean managingVolunteers = true;
 
+					while (managingVolunteers) {
+						System.out.println();
+						System.out.println("1) Add a new Volunteer");
+						System.out.println("2) Give Feedback and Rating to Volunteer");
+						System.out.println("3) Assign a Task to a Volunteer");
+						System.out.println("4) View Task Assignments");
+						System.out.println("5) Exit Volunteer Management Menu");
+						System.out.println();
+						System.out.print("Enter number choice: ");
+						String volOption = scan.nextLine();
+						System.out.println();
+	
+						switch (volOption) {
+							// Add volunteer
+							case "1":
+								System.out.print("Enter volunteer name: ");
+								String newVol = scan.nextLine();
+								taskScheduler.addVolunteer(new Volunteer(newVol));
+								break;
+
+							// Rate and give feedback to volunteer
+							case "2":
+								System.out.print("Enter volunteer name: ");
+								String volToRate = scan.nextLine();
+
+								Volunteer targetVol = findVolunteerByName(volToRate);
+
+								if (targetVol == null)
+									System.out.println("Volunteer Not Found");
+								else
+									report.rateVolunteer(targetVol);
+								break;
+	
+							// Assign task
+							case "3":
+								System.out.print("Enter volunteer name: ");
+								String volToAssign = scan.nextLine();
+
+								Volunteer volunteer = findVolunteerByName(volToAssign);
+
+								if (volunteer != null) {
+									System.out.print("Enter task name: ");
+									String taskToAssign = scan.nextLine();
+
+									Task targetTask = findTaskByName(taskToAssign);
+									if (targetTask == null)
+										System.out.println("Task Not Found");
+									else
+										taskScheduler.assignTaskToVolunteer(targetTask, volunteer);
+
+								} else
+									System.out.println("Volunteer Not Found");
+								break;
+	
+							// View task assignments
+							case "4":
+								taskScheduler.printSchedule();
+								break;
+	
+							// Exit Volunteer Management Menu
+							case "5":
+								managingVolunteers = false;
+								break;
+	
+							default:
+								break;
+						}
+					}
 					break;
 
 				// View tasks and schedule
 				case "3":
-					System.out.println(taskScheduler.getTasks());
+					if (taskScheduler.anyTasksAvailable()) {
+						System.out.println("Available Tasks");
+						for (Task task : taskScheduler.getTasks())
+							System.out.println(task);
+					} else
+						System.out.println("No tasks available");
 					System.out.println();
 					taskScheduler.printSchedule();
 					break;
@@ -157,13 +232,14 @@ public class CentralManagementApp {
 			System.out.println();
 			System.out.print("Enter number choice: ");
 			String choice = input.nextLine();
+			System.out.println();
 
 			switch (choice) {
 				// Crop Growth Report
 				case "1":
 					boolean cropsEmpty = (cropManager.getCrops()).isEmpty();
 					if (cropsEmpty)
-						System.out.println("Crop List Empty");
+						System.out.println("Crop List is Empty");
 					else
 						report.generateCropGrowthReport(cropManager.getCrops());
 					break;
@@ -173,27 +249,9 @@ public class CentralManagementApp {
 					report.generateTaskCompletionReport(taskScheduler);
 					break;
 
-				// Volunteer Rating Survey
+				// Volunteer Rating Report
 				case "3":
-					System.out.print("Enter Volunteer's Name: ");
-					String volunteerName = input.nextLine();
-					Volunteer person = null;
-					boolean volunteerFound = false;
-					int next = 0;
-
-					List<Volunteer> volunteers = taskScheduler.getVolunteers();
-					while (!volunteerFound && next < volunteers.size()) {
-						person = volunteers.get(next);
-						if (volunteerName.equalsIgnoreCase(person.getName()))
-							volunteerFound = true;
-					}
-
-					if (volunteerFound) {
-						System.out.println("Volunteer Found...");
-						report.rateVolunteer(person);
-					} else
-						System.out.println("Volunteer Not Found");
-
+					report.generateVolunteerRatingReport(taskScheduler.getVolunteers());
 					break;
 
 				// Volunteers and Tasks Report
@@ -232,6 +290,7 @@ public class CentralManagementApp {
 			System.out.println();
 			System.out.print("Enter number choice: ");
 			String choice = scan.nextLine();
+			System.out.println();
 
 			switch (choice) {
 				// Add a product
@@ -270,13 +329,14 @@ public class CentralManagementApp {
 				case "3":
 					System.out.print("Enter to-be-modified product name: ");
 					String modifyProduct = scan.nextLine();
-					Product modifyTarget = inventory.getProduct(modifyProduct);
 					boolean modifyingProduct = true;
+					Product modifyTarget = inventory.getProduct(modifyProduct);
 
 					if (modifyTarget == null)
 						System.out.println("Product not found.");
 
 					while (modifyingProduct) {
+						System.out.println();
 						System.out.println("1) Sell Price");
 						System.out.println("2) Quantity Available");
 						System.out.println("3) Expiration Date");
@@ -284,6 +344,7 @@ public class CentralManagementApp {
 						System.out.println();
 						System.out.print("What would you like to modify? ");
 						String modOption = scan.nextLine();
+						System.out.println();
 
 						switch (modOption) {
 							// Sell Price
@@ -367,9 +428,9 @@ public class CentralManagementApp {
 		System.out.println();
 		System.out.println("Lopez Urban Farm Management App 1.0");
 		System.out.println("-----------------------------------");
-		System.out.println("1) Task Management");
+		System.out.println("1) Task / Volunteer Management");
 		System.out.println("2) Crop Management");
-		System.out.println("3) Farm Reports and Surveys");
+		System.out.println("3) Farm Reports");
 		System.out.println("4) Inventory Analytics");
 		System.out.println("5) Exit");
 		System.out.println();
@@ -377,8 +438,7 @@ public class CentralManagementApp {
 		System.out.print("Enter number choice: ");
 	}
 
-	// Since data is not saved in between uses, we set up values for Demo purposes
-	// for each use
+	// Since data is not saved in between uses, we set up values for Demo purposes for each use
 	private static void initalizeTestValues() {
 
 		// Volunteers
@@ -413,5 +473,39 @@ public class CentralManagementApp {
 		inventory.addProduct(new Product("Tomato", 100, 0, 10.00, 8.00, 30));
 		inventory.addProduct(new Product("Corn", 50, 0, 20.00, 15.00, 60));
 		inventory.setExpenses(50.0);
+	}
+
+	private static Volunteer findVolunteerByName(String name) {
+		List<Volunteer> volunteers = taskScheduler.getVolunteers();
+		Volunteer target = null;
+		boolean volunteerFound = false;
+		int next = 0;
+
+		while (!volunteerFound && next < volunteers.size()) {
+			target = volunteers.get(next);
+			if (name.equalsIgnoreCase(target.getName()))
+				volunteerFound = true;
+		}
+
+		if (volunteerFound) 
+			return target;
+		return null;
+	}
+
+	private static Task findTaskByName(String name) {
+		List<Task> tasks = taskScheduler.getTasks();
+		Task target = null;
+		boolean taskFound = false;
+		int next = 0;
+
+		while (!taskFound && next < tasks.size()) {
+			target = tasks.get(next);
+			if (name.equalsIgnoreCase(target.getName()))
+				taskFound = true;
+		}
+
+		if (taskFound) 
+			return target;
+		return null;
 	}
 }
