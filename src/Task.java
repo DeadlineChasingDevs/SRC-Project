@@ -1,5 +1,7 @@
 import java.util.List;
-
+/**
+Class used to create a task and store all its components
+**/
 public class Task {
     /** 
     * Variables used for a task 
