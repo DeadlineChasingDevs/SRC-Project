@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+* Class specified for Volunteers
+**/
 public class Volunteer {
     private String name;
     private List<Task> assignedTasks;
