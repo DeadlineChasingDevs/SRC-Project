@@ -1,4 +1,16 @@
+/**
+ * This class demonstrates the functionality of the InventoryAnalytics system.
+ * It creates instances of products, adds them to the inventory, performs
+ * sales operations, and calculates various analytics metrics.
+ */
 public class AnalyticsDemo {
+    /**
+     * The main method demonstrates the functionality of the InventoryAnalytics system.
+     * It creates an instance of the InventoryAnalytics class, adds products to the inventory,
+     * performs sales operations, and prints various analytics metrics.
+     * @param args the command-line arguments (not used in this demo)
+     * @throws Exception if there is an error during execution
+     */
     public static void main(String[] args) throws Exception {
         InventoryAnalytics analytics = new InventoryAnalytics();
 
