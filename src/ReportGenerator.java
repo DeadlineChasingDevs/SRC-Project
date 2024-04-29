@@ -2,14 +2,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class generates various reports related to crops, tasks, and volunteer performance.
+ */
 public class ReportGenerator {
     private Scanner scanner;
-
+     /**
+     * Constructs a ReportGenerator object.
+     * Initializes the scanner to read input from the console.
+     */
     public ReportGenerator() {
         this.scanner = new Scanner(System.in);
     }
 
-    // Method to generate crop growth report
+    /**
+     * Generates a report detailing the growth status of crops.
+     *
+     * @param crops A list of Crop objects to generate the report for.
+     */
     public void generateCropGrowthReport(List<Crop> crops) {
         System.out.println("Crop Growth Report:");
         System.out.println("--------------------------------------------------");
@@ -30,7 +40,11 @@ public class ReportGenerator {
         System.out.println("--------------------------------------------------");
     }
 
-    // Method to generate task completion report
+      /**
+     * Generates a report detailing the completion status of tasks and allows user input for incomplete tasks.
+     *
+     * @param taskScheduler The TaskScheduler object containing tasks to generate the report for.
+     */
     public void generateTaskCompletionReport(TaskScheduler taskScheduler) {
         System.out.println("Task Completion Report:");
         List<Task> tasks = taskScheduler.getTasks();
@@ -57,7 +71,11 @@ public class ReportGenerator {
         System.out.println("--------------------------------------------------");
     }
 
-    // Method to generate volunteer performance report
+     /**
+     * Allows rating and providing feedback for a volunteer.
+     *
+     * @param volunteer The Volunteer object to rate and provide feedback for.
+     */
     public void rateVolunteer(Volunteer volunteer) {
         System.out.print("Rate volunteer " + volunteer.getName() + " (1 to 5): ");
         double rating = scanner.nextDouble();
@@ -74,6 +92,11 @@ public class ReportGenerator {
         System.out.println("--------------------------------------------------");
     }
 
+    /**
+     * Generates a report detailing the ratings and feedback of volunteers.
+     *
+     * @param volunteers A list of Volunteer objects to generate the report for.
+     */
     public void generateVolunteerRatingReport(List<Volunteer> volunteers) {
         System.out.println("Volunteers and Their Ratings / Feedback");
 
@@ -87,7 +110,11 @@ public class ReportGenerator {
         System.out.println("--------------------------------------------------");
     }
 
-    // Method to list volunteers and their assigned tasks with expected finish times
+    /**
+     * Lists the volunteers along with their assigned tasks and expected finish times.
+     *
+     * @param volunteers A list of Volunteer objects to list their assigned tasks for.
+     */
     public void listVolunteersAndTasks(List<Volunteer> volunteers) {
         System.out.println("Volunteers and Their Assigned Tasks:");
         for (Volunteer volunteer : volunteers) {
@@ -103,7 +130,10 @@ public class ReportGenerator {
         }
         System.out.println("--------------------------------------------------");
     }
-
+    
+     /**
+     * Closes the scanner used for user input.
+     */
     public void closeScanner() {
         scanner.close();
     }
