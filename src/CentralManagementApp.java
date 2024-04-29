@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 /**
  * A centralized management app that keeps task scheduling, crop management, farm analytics,
@@ -209,8 +210,98 @@ public class CentralManagementApp {
 
 	// Case 2: Crop Management
 	private static void manageCrops() {
-		System.out.println("Crop Management");
-		// ...
+		boolean isManagingCrops = true;
+
+		cropManager.displayCrops();
+
+		while (isManagingCrops) {
+			System.out.printf("%n1) Add a Crop%n" +
+					"2) Modify a Crop%n" +
+					"3) View Crops%n" +
+					"4) Return to Main Menu%n%n");
+			System.out.print("Enter number choice: ");
+			String choice = scan.nextLine();
+			System.out.println();
+
+			switch (choice) {
+				// Add a crop
+				case "1":
+					System.out.print("Crop Name: ");
+					String cropName = scan.nextLine();
+					System.out.print("Days Until Expired: ");
+					int daysUntilExpired = scan.nextInt();
+					Crop newCrop = new Crop(cropName, daysUntilExpired);
+					
+					System.out.print("Set a planting date (YYYY-MM-DD): ");
+					String date = scan.nextLine();
+					LocalDate plantDate = LocalDate.parse(date);
+					
+					System.out.print("Set a harvest date (YYYY-MM-DD): ");
+					date = scan.nextLine();
+					LocalDate harvestDate = LocalDate.parse(date);
+					
+					newCrop.setPlantingDate(plantDate);
+					newCrop.setHarvestDate(harvestDate);
+					cropManager.addCrop(newCrop);
+					break;
+				
+				// Modify a Crop
+				case "2":
+					System.out.print("Enter to-be-modified crop name: ");
+					String modifyCrop = scan.nextLine();
+					boolean modifyingCrop = true;
+					Crop modifyTarget = findCropByName(modifyCrop);
+
+					if (modifyTarget == null)
+						System.out.println("Product not found.");
+
+					while (modifyingCrop) {
+						System.out.printf("%n1) Plant Date%n" +
+								"2) Harvest Date%n" +
+								"3) Exit Modification%n%n");
+						System.out.print("What would you like to modify? ");
+						String modOption = scan.nextLine();
+						System.out.println();
+
+						switch (modOption) {
+							case "1":
+								System.out.print("New plant date (YYYY-MM-DD): ");
+								String plantDateInput = scan.nextLine();
+								LocalDate newPlantDate = LocalDate.parse(plantDateInput);
+								modifyTarget.setPlantingDate(newPlantDate);
+								break;
+
+							case "2":
+								System.out.print("New harvest date (YYYY-MM-DD): ");
+								String harvestDateInput = scan.nextLine();
+								LocalDate newHarvestDate = LocalDate.parse(harvestDateInput);
+								modifyTarget.setHarvestDate(newHarvestDate);
+								break;
+
+							case "3":
+								modifyingCrop = false;
+								break;
+
+							default:
+								break;
+						}
+					}
+					break;
+				
+				// View crops
+				case "3":
+					cropManager.displayCrops();
+					break;
+
+				// Return to main menu
+				case "4":
+					isManagingCrops = false;
+					break;
+
+				default:
+					break;
+			}
+		}
 	}
 
 	// Case 3: Report Generator
@@ -453,9 +544,10 @@ public class CentralManagementApp {
 		taskScheduler.assignTaskToVolunteer(tour, v);
 
 		// Crop Management
-		cropManager.addCrop(new Crop("Tomatoes", 60));
-		cropManager.addCrop(new Crop("Lettuce", 90));
-		cropManager.addCrop(new Crop("Carrots", 120));
+		Crop c1 = new Crop("Tomatoes", 60);
+		c1.setHarvestDate(LocalDate.parse("2025-10-20"));
+		c1.setPlantingDate(LocalDate.parse("2024-04-28"));
+		cropManager.addCrop(c1);
 
 		// Farm Analytics
 		inventory.addProduct(new Product("Tomato", 100, 0, 10.00, 8.00, 30));
@@ -495,5 +587,23 @@ public class CentralManagementApp {
 		if (taskFound)
 			return target;
 		return null;
+	}
+
+	private static Crop findCropByName(String name) {
+		List<Crop> crops = cropManager.getCrops();
+		Crop target = null;
+		boolean cropFound = false;
+		int next = 0;
+
+		while (!cropFound && next < crops.size()) {
+			target = crops.get(next);
+			if (name.equalsIgnoreCase(target.getName()))
+				cropFound = true;
+		}
+
+		if (cropFound)
+			return target;
+		return null;
+
 	}
 }
