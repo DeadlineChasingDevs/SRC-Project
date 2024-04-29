@@ -230,6 +230,7 @@ public class CentralManagementApp {
 					String cropName = scan.nextLine();
 					System.out.print("Days Until Expired: ");
 					int daysUntilExpired = scan.nextInt();
+					scan.nextLine(); 
 					Crop newCrop = new Crop(cropName, daysUntilExpired);
 					
 					System.out.print("Set a planting date (YYYY-MM-DD): ");
