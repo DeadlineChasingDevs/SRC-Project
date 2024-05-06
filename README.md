@@ -4,12 +4,14 @@
 
 **Project Leader**: Liam Buckman (@lebuckman) (lebuckman@cpp.edu)
 - CentralManagementApp.java
+- Technical Paper
   
 **Member**: Jazmin Carlos (@jazcar1205) (jazmincarlos@cpp.edu)
 - Task Scheduling
     - Task.java
     - Volunteer.java
     - TaskScheduler.java
+- Presentation Slides 
   
 **Member**: Guanlin Chen (@jchen1411) (guanlinchen@cpp.edu)
  - Report.java
