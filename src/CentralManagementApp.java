@@ -606,6 +606,8 @@ public class CentralManagementApp {
 			target = crops.get(next);
 			if (name.equalsIgnoreCase(target.getName()))
 				cropFound = true;
+			else
+				next++;
 		}
 
 		if (cropFound)
